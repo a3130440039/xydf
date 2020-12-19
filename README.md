@@ -45,7 +45,7 @@
 账号：admin   密码：123456
 
 要部署文档可加QQ群965741934  群密码：咸鱼
-群主QQ：3130440039
+
 纸飞机Telegram群链接：https://t.me/yiqunxianyu
 
 
