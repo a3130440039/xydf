@@ -1,0 +1,27 @@
+<div class="panel panel-default panel-intro">
+    {:build_heading()}
+
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <div class="widget-body no-padding">
+                    <div id="toolbar" class="toolbar">
+                        {:build_toolbar('refresh,add,del,clear')}
+                        [清空当前数据:不选择清空全部;选择清空已选定]
+                    </div>
+                    <table id="table" class="table table-striped table-bordered table-hover" 
+                           data-operate-edit="{:$auth->check('shop/shop/edit')}"
+                           data-operate-del="{:$auth->check('shop/shop/del')}"
+                           data-operate-del="{:$auth->check('shop/shop/clear')}"
+                           width="100%">
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-default" >
+        <div class="panel-body" id="tongji">
+        </div>
+    </div>
+</div>

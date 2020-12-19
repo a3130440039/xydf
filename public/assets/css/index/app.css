@@ -1,0 +1,25 @@
+.container{
+    width: 80%;
+    height: auto;
+    color: red;
+    border: #5e5e5e 1px dashed;
+    margin-top: 10%;
+    border-radius: 30px;
+    z-index: 999;
+}
+.top{
+    height: 30%;
+    color: #0d0d0d;
+    text-align: center;
+    font-size: medium;
+    margin-top: 5%;
+}
+.bottom{
+    margin-top: 6%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+.img{
+    width: 95%;
+    margin: 0 auto;
+}
